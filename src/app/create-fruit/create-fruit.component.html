@@ -1,0 +1,17 @@
+<form class="w-80" [formGroup]="fruitForm" (submit)="addFruit()">
+    <div>
+      <label for="fruitId">ID</label>
+      <input id="fruitId" type="text" formControlName="id" required
+             minlength="1" pattern="^[a-zA-Z0-9\s_-]+$"
+             placeholder="Fruit ID">
+    </div>
+  
+    <div>
+      <label for="fruitName">Name</label>
+      <input id="fruitName" type="text" formControlName="fruitName" required
+             minlength="1" pattern="^[a-zA-Z0-9\s_-]+$"
+             placeholder="Fruit Name">
+    </div>
+  
+    <button type="submit">Add Fruit</button>
+  </form>
