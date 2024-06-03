@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { response } from 'express';
 import { Observable, Subject } from 'rxjs';
 
@@ -19,12 +19,29 @@ export class FruitServiceService {
 
   constructor(private http: HttpClient) { }
 
+  // addfruit_service(pid: string, pnname: string){
+  //   this.http.post<{message:string, fruit:any}>('http://localhost:3000/product/',{id:pid, name:pnname})
+  //   .subscribe((thefruit) => {
+  //     this.fruitsdisplay.push(thefruit.fruit);
+  //     this.updatedfruitdisplay.next([...this.fruitsdisplay]);
+  //   })
+  // }
+
   addfruit_service(pid: string, pnname: string){
-    this.http.post<{message:string, fruit:any}>('http://localhost:3000/product/',{id:pid, name:pnname})
-    .subscribe((thefruit) => {
-      this.fruitsdisplay.push(thefruit.fruit);
-      this.updatedfruitdisplay.next([...this.fruitsdisplay]);
-    })
+    const token = localStorage.getItem('token');
+
+    console.log("Token: ", token)
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    this.http.post<{message:string, fruit:any}>('http://localhost:3000/product/', {id:pid, name:pnname}, { headers: headers })
+      .subscribe((thefruit) => {
+        this.fruitsdisplay.push(thefruit.fruit);
+        this.updatedfruitdisplay.next([...this.fruitsdisplay]);
+      })
   }
 
   // getfruit_service(): Observable<{message:string,fruits:any}> {

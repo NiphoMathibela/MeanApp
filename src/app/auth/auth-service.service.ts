@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -22,4 +22,44 @@ export class AuthServiceService {
   getToken(): string | null {
     return this.token;
   }
+
+  //New Login service
+  login2(username: string, password: string) {
+
+    const headers = new HttpHeaders({
+
+      'Content-Type': 'application/json'
+
+    });
+
+
+    const body = { username, password };
+
+
+    return this.http.post('http://localhost:3000/users/login', body, { headers })
+
+      .toPromise()
+
+      .then((response: any) => {
+
+        // Handle the response (e.g., store the token)
+
+        localStorage.setItem('token', response.token);
+        
+        console.log("Token: ", response.token)
+
+        return response.token;
+
+      })
+
+      .catch((error: any) => {
+
+        console.error(error);
+
+        return null;
+
+      });
+
+  }
+
 }

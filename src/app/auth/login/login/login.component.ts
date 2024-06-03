@@ -51,4 +51,32 @@ export class LoginComponent {
       this.errorMessage = "Please enter your username and password";
     }
   }
+
+  onLogin() {
+
+    this.authservice.login2(this.username, this.password)
+
+     .then((token: string) => {
+
+        if (token) {
+
+          console.log('Login successful!');
+
+          // You can also navigate to a different route or perform any other action after login
+
+        } else {
+
+          console.log('Login failed!');
+
+        }
+
+      })
+
+     .catch((error: any) => {
+
+        console.error('Error logging in:', error);
+
+      });
+
+  }
 }
