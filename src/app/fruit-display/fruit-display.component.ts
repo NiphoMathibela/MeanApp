@@ -22,14 +22,18 @@ export class FruitDisplayComponent {
     });
   }
 
+  async fetchData() {
+    this.fruits = await this.fruitservice.getfruit_service();
+  }
+
   ondelete(fruitId: string) {
     this.fruitservice.deletefruit_service(fruitId)
       .then(deletedFruit => {
         // Handle success scenario (optional)
         alert(`Item deleted successfully ${fruitId}`)
         if (deletedFruit) {
-          // Remove the deleted fruit from the local fruit array (if applicable)
-          this.fruits = this.fruits.filter(f => f._id !== deletedFruit._id);
+          // this.fruits = this.fruits.filter(f => f._id !== deletedFruit._id);
+          this.fetchData()
         }
       })
       .catch(error => {
@@ -41,17 +45,4 @@ export class FruitDisplayComponent {
 
   private fruitsubscription!: Subscription;
 
-  // ngOnInit() {
-  //   this.fruitservice.getfruit_service();
-
-  //   this.fruitsubscription = this.fruitservice.getUpdateListener()
-  //   .subscribe((fruits:{_id:string, id: string, name: string, _v: string} [])=>{
-  //     this. fruits = fruits;
-  //   })
-  // }
-  
-
-  // ngOnDestroy(){
-  //   this.fruitsubscription.unsubscribe();
-  // }
 }
