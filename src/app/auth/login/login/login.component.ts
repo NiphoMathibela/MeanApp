@@ -33,7 +33,7 @@ export class LoginComponent {
             (response) => {
               // Handle successful login (e.g., store token, redirect)
               console.log("Login successful:", response);
-              this.router.navigate(['/home']); // Example redirect
+              this.router.navigate(['/']);
             },
             (error) => {
               // Handle login error
@@ -62,7 +62,8 @@ export class LoginComponent {
 
           console.log('Login successful!');
 
-          // You can also navigate to a different route or perform any other action after login
+          // navigate to a different route
+          this.router.navigate(['/home']);
 
         } else {
 
