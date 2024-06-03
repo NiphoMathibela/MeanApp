@@ -53,31 +53,59 @@ export class LoginComponent {
   }
 
   onLogin() {
-
     this.authservice.login2(this.username, this.password)
-
-     .then((token: string) => {
-
+      .then((token: string) => {
         if (token) {
-
           console.log('Login successful!');
-
           // navigate to a different route
           this.router.navigate(['/home']);
-
         } else {
-
           console.log('Login failed!');
+          this.authservice.signup(this.username, this.password)
+            .subscribe((response: any) => {
+              console.log('Sign up successful!');
+              // navigate to a different route
+              this.router.navigate(['/home']);
+            }),
+            (error: any) => {
 
+              console.error('Error signing up:', error);
+  
+            }
         }
-
       })
-
-     .catch((error: any) => {
-
+      .catch((error: any) => {
         console.error('Error logging in:', error);
-
       });
-
   }
+
+  // onLogin() {
+
+  //   this.authservice.login2(this.username, this.password)
+
+  //    .then((token: string) => {
+
+  //       if (token) {
+
+  //         console.log('Login successful!');
+
+  //         // navigate to a different route
+  //         this.router.navigate(['/home']);
+
+  //       } else {
+
+  //         // console.log('Login failed!');
+  //         this.authservice.signup(this.username, this.password);
+
+  //       }
+
+  //     })
+
+  //    .catch((error: any) => {
+
+  //       console.error('Error logging in:', error);
+
+  //     });
+
+  // }
 }

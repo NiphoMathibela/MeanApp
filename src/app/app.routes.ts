@@ -7,6 +7,6 @@ export const routes: Routes = [
     { path: '', component: FruitDisplayComponent }, // Default route
     { path: 'add', component: CreateFruitComponent }, // Route for adding fruit
     { path: 'login', component: LoginComponent }, // Route for login
-    // { path: 'signup', component: SignupComponent }, // Route for signup (assuming SignupComponent exists)
+    { path: 'signup', component: LoginComponent }, // Route for signup (assuming SignupComponent exists)
     { path: '**', redirectTo: '', pathMatch: 'full' } // Wildcard route for 404 handling
   ];;
