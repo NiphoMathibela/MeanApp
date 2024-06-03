@@ -26,6 +26,7 @@ export class FruitDisplayComponent {
     this.fruitservice.deletefruit_service(fruitId)
       .then(deletedFruit => {
         // Handle success scenario (optional)
+        alert(`Item deleted successfully ${fruitId}`)
         if (deletedFruit) {
           // Remove the deleted fruit from the local fruit array (if applicable)
           this.fruits = this.fruits.filter(f => f._id !== deletedFruit._id);

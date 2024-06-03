@@ -19,14 +19,6 @@ export class FruitServiceService {
 
   constructor(private http: HttpClient) { }
 
-  // addfruit_service(pid: string, pnname: string){
-  //   this.http.post<{message:string, fruit:any}>('http://localhost:3000/product/',{id:pid, name:pnname})
-  //   .subscribe((thefruit) => {
-  //     this.fruitsdisplay.push(thefruit.fruit);
-  //     this.updatedfruitdisplay.next([...this.fruitsdisplay]);
-  //   })
-  // }
-
   addfruit_service(pid: string, pnname: string){
     const token = localStorage.getItem('token');
 
@@ -44,16 +36,6 @@ export class FruitServiceService {
       })
   }
 
-  // getfruit_service(): Observable<{message:string,fruits:any}> {
-  //   this.http.get<{message:string,fruits:any}>('https://localhost:3000/product')
-  //   .subscribe((thefruit)=>
-  //   {
-
-  //   this. fruitsdisplay = thefruit.fruits
-  //   this.updatedfruitdisplay.next([ ... this.fruitsdisplay]);
-  //   })
-  //   }
-
   async getfruit_service() : Promise<{_id:string, id:string, name:string, _v:string}[]>
   {
     const data = await fetch(this.url)
@@ -61,8 +43,31 @@ export class FruitServiceService {
   }
 
   async deletefruit_service(fruitid: string) : Promise<{_id:string, id:string, name:string, _v:string} | undefined> {
-    const data = await fetch(`${this.url}/${fruitid}`)
-    return await data.json() ?? {}
+    const headers = new HttpHeaders({
+
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+
+      'Content-Type': 'application/json'
+
+    });
+
+    return this.http.delete(`${this.url}/${fruitid}`, { headers: headers })
+
+      .toPromise()
+
+      .then((response: any) => {
+
+        return response;
+
+      })
+
+      .catch((error: any) => {
+
+        console.error(error);
+
+        return undefined;
+
+      });
   }
 }
 

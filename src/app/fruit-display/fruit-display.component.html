@@ -2,7 +2,7 @@
     <div *ngFor="let fruit of fruits" class="p-4 bg-white rounded-lg shadow-md">
       <div class="flex items-center justify-between">
         <p class="text-sm font-medium text-gray-700">{{ fruit.id }} - {{ fruit.name }}</p>
-        <button (click)="ondelete(fruit._id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</button>
+        <button (click)="ondelete(fruit.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</button>
       </div>
     </div>
 </div>
