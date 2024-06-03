@@ -11,12 +11,13 @@
       <div *ngif="username.invalid && (username.dirty || username.touched)">Invalid</div>
       <div class="mb-4">
         <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password"
+        <input type="password" id="password" required minlength="8" [(ngModel)]="password" name="password"
           class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500">
       </div>
+      <app-error *ngIf="errorMessage" [errorMessage]="errorMessage"></app-error>
       <div *ngif="password.invalid && (password.dirty || password.touched)">Invalid</div>
       <div class="flex items-center justify-between mb-4">
-        <button type="submit"class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2">Login</button>
+        <button type="submit"class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2">Login</button>
       </div>
     </form>
   </div>
